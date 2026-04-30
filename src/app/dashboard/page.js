@@ -67,7 +67,9 @@ export default function Dashboard() {
 
       <div className={styles.statsGrid}>
         <div className={`glass-panel ${styles.statCard}`}>
-          <span className={styles.statTitle}>Total Assigned</span>
+          <span className={styles.statTitle}>
+            {session.user.role === 'ADMIN' ? 'Total Tasks' : 'Total Assignments'}
+          </span>
           <span className={styles.statValue}>{tasks.length}</span>
         </div>
         <div className={`glass-panel ${styles.statCard}`}>

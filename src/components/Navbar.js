@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSession, signOut } from "next-auth/react";
 import styles from "./Navbar.module.css";
-import { LogOut, LayoutDashboard, FolderKanban, CheckSquare } from "lucide-react";
+import { LogOut, LayoutDashboard, FolderKanban, CheckSquare, User } from "lucide-react";
 
 export default function Navbar() {
   const { data: session } = useSession();
@@ -27,6 +27,9 @@ export default function Navbar() {
               </Link>
               <Link href="/projects" className={styles.navLink}>
                 <FolderKanban size={18} /> Projects
+              </Link>
+              <Link href="/profile" className={styles.navLink}>
+                <User size={18} /> Profile
               </Link>
               <div className={styles.userMenu}>
                 <div className={styles.userName}>
