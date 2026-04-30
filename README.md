@@ -3,11 +3,13 @@
 A full-stack project and task management application built with Next.js (App Router), Prisma, and NextAuth.js.
 
 ## Features
-- 🔐 **Authentication:** Secure signup & login using NextAuth Credentials and bcrypt.
-- 👥 **Role-Based Access Control:** Admin & Member roles.
-- 📊 **Dashboard:** Overview of total tasks, in-progress tasks, completed, and overdue tasks.
-- 📂 **Projects:** Create and manage projects.
-- ✅ **Task Board:** Assign tasks, set priorities, due dates, and update statuses.
+- 🔐 **Authentication:** Secure signup & login using NextAuth and bcrypt.
+- 👥 **Role-Based Access Control:** Admin & Member roles with distinct permissions.
+- ⭐ **Task Rating System:** Admins can rate completed work (1-5 stars).
+- 🔄 **Auto-Reassignment:** Tasks with low ratings (< 2/5) are automatically reassigned to other members.
+- 📊 **Dynamic Dashboard:** Role-specific stats, "My Projects" view for members, and "Total Tasks" for admins.
+- 📂 **Project Management:** Create projects and manage tasks within a mandatory project context.
+- 👤 **User Profile:** Dedicated profile section to view/update details and change passwords securely.
 - 🎨 **Premium UI:** Glassmorphism, CSS Modules, vibrant gradients, and animations.
 
 ## Local Development Setup
