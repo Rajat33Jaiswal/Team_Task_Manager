@@ -32,7 +32,9 @@ export async function PATCH(req) {
     if (!session) return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
 
     const body = await req.json();
-    const { name, email, password } = body;
+    const { name, email, password, oldPassword } = body;
+
+    const user = await prisma.user.findUnique({ where: { id: session.user.id } });
 
     const updateData = {};
     if (name) updateData.name = name;
@@ -44,7 +46,17 @@ export async function PATCH(req) {
       }
       updateData.email = email;
     }
+    
     if (password) {
+      if (!oldPassword) {
+        return NextResponse.json({ message: 'Old password is required to set a new one' }, { status: 400 });
+      }
+      
+      const isPasswordValid = await bcrypt.compare(oldPassword, user.passwordHash);
+      if (!isPasswordValid) {
+        return NextResponse.json({ message: 'Current password is incorrect' }, { status: 400 });
+      }
+      
       updateData.passwordHash = await bcrypt.hash(password, 10);
     }
 

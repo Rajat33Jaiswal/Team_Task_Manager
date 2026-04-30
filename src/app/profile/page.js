@@ -12,6 +12,7 @@ export default function Profile() {
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   
@@ -60,7 +61,7 @@ export default function Profile() {
         body: JSON.stringify({ 
           name, 
           email, 
-          ...(password ? { password } : {}) 
+          ...(password ? { password, oldPassword } : {}) 
         }),
       });
 
@@ -68,6 +69,7 @@ export default function Profile() {
 
       if (res.ok) {
         setMessage({ type: "success", text: "Profile updated successfully!" });
+        setOldPassword("");
         setPassword("");
         setConfirmPassword("");
         // Update the session to reflect new name/email
@@ -131,7 +133,17 @@ export default function Profile() {
           </div>
 
           <div className={styles.formGroup}>
-            <label><Lock size={16} /> New Password (leave blank to keep current)</label>
+            <label><Lock size={16} /> Current Password (required to change password)</label>
+            <input 
+              type="password" 
+              value={oldPassword} 
+              onChange={(e) => setOldPassword(e.target.value)} 
+              placeholder="••••••••"
+            />
+          </div>
+
+          <div className={styles.formGroup}>
+            <label><Lock size={16} /> New Password</label>
             <input 
               type="password" 
               value={password} 
