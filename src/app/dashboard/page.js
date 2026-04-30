@@ -70,9 +70,11 @@ export default function Dashboard() {
       <div className={styles.statsGrid}>
         <div className={`glass-panel ${styles.statCard}`}>
           <span className={styles.statTitle}>
-            {session.user.role === 'ADMIN' ? 'Total Tasks' : 'Total Assignments'}
+            {session.user.role === 'ADMIN' ? 'Total Tasks' : 'My Projects'}
           </span>
-          <span className={styles.statValue}>{tasks.length}</span>
+          <span className={styles.statValue}>
+            {session.user.role === 'ADMIN' ? tasks.length : assignedProjectsCount}
+          </span>
         </div>
         <div className={`glass-panel ${styles.statCard}`}>
           <span className={styles.statTitle} style={{ color: "var(--warning)" }}>In Progress</span>
@@ -86,12 +88,6 @@ export default function Dashboard() {
           <span className={styles.statTitle} style={{ color: "var(--danger)" }}>Overdue</span>
           <span className={styles.statValue}>{overdueTasks.length}</span>
         </div>
-        {session.user.role !== 'ADMIN' && (
-          <div className={`glass-panel ${styles.statCard}`}>
-            <span className={styles.statTitle} style={{ color: "var(--accent-primary)" }}>My Projects</span>
-            <span className={styles.statValue}>{assignedProjectsCount}</span>
-          </div>
-        )}
       </div>
 
       <div className={styles.tasksSection}>
