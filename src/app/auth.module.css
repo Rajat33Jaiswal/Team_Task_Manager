@@ -1,0 +1,71 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 70px);
+  padding: 20px;
+}
+
+.authCard {
+  width: 100%;
+  max-width: 440px;
+  padding: 40px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.error {
+  color: var(--danger);
+  background: rgba(239, 68, 68, 0.1);
+  padding: 12px;
+  border-radius: var(--border-radius-sm);
+  font-size: 0.9rem;
+  text-align: center;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.footer {
+  margin-top: 24px;
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.link {
+  color: var(--accent-primary);
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--accent-hover);
+}

@@ -1,0 +1,142 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.statCard {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.statTitle {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.tasksSection {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+.sectionHeader {
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-color);
+  background: rgba(15, 23, 42, 0.4);
+}
+
+.sectionTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+}
+
+.taskItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--border-color);
+  transition: background 0.2s ease;
+}
+
+.taskItem:last-child {
+  border-bottom: none;
+}
+
+.taskItem:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.taskInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.taskTitle {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.taskProject {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.taskMeta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.overdue {
+  color: var(--danger);
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.emptyState {
+  padding: 40px;
+  text-align: center;
+  color: var(--text-secondary);
+}
+
+.ratingBadge {
+  color: var(--success);
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: rgba(16, 185, 129, 0.1);
+  padding: 2px 8px;
+  border-radius: 12px;
+}
+
+@media (max-width: 900px) {
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 600px) {
+  .statsGrid { grid-template-columns: 1fr; }
+  .taskItem { flex-direction: column; align-items: flex-start; gap: 12px; }
+  .taskMeta { width: 100%; justify-content: flex-start; }
+}

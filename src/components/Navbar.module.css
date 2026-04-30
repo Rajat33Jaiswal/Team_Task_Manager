@@ -1,0 +1,100 @@
+.navbar {
+  background-color: var(--accent-primary); /* blue-900 */
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-lg */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.container {
+  max-width: 1200px; /* equivalent to max-w-7xl */
+  margin: 0 auto;
+  padding: 0 16px; /* px-4 */
+  height: 64px; /* h-16 */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.25rem; /* text-xl */
+  font-weight: 700; /* font-bold */
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logoIcon {
+  color: white;
+}
+
+.logo p {
+  font-size: 0.875rem; /* text-sm */
+  color: #bfdbfe; /* blue-200 */
+  font-weight: 400;
+  margin: 0;
+}
+
+.logoTitleWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navLink {
+  color: #bfdbfe; /* blue-200 */
+  font-weight: 500;
+  font-size: 0.875rem; /* text-sm */
+  transition: color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.navLink:hover {
+  color: white;
+}
+
+.userMenu {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-left: 12px;
+}
+
+.userName {
+  font-weight: 500;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  font-size: 0.875rem; /* text-sm */
+}
+
+.badge {
+  color: #bfdbfe; /* blue-200 */
+  font-size: 0.75rem; /* text-xs */
+  text-transform: capitalize;
+  font-weight: 400;
+}
+
+.logoutBtn {
+  background: transparent;
+  color: #bfdbfe; /* blue-200 */
+  font-weight: 500;
+  font-size: 0.875rem; /* text-sm */
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease;
+}
+
+.logoutBtn:hover {
+  color: white;
+}
