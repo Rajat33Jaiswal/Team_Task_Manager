@@ -24,6 +24,7 @@ export default function ProjectDetail() {
   const [assigneeId, setAssigneeId] = useState("");
   const [dueDate, setDueDate] = useState("");
   const [submitting, setSubmitting] = useState(false);
+  const [editingTask, setEditingTask] = useState(null); // For edit modal
 
   useEffect(() => {
     if (status === "unauthenticated") router.push("/login");
@@ -81,6 +82,40 @@ export default function ProjectDetail() {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleUpdateTask = async (e) => {
+    e.preventDefault();
+    setSubmitting(true);
+    try {
+      const res = await fetch(`/api/tasks/${editingTask.id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          title, description, priority, 
+          assigneeId: assigneeId || null, 
+          dueDate: dueDate || null,
+        }),
+      });
+      if (res.ok) {
+        setEditingTask(null);
+        setTitle(""); setDescription(""); setAssigneeId(""); setDueDate(""); setPriority("MEDIUM");
+        fetchProject();
+      }
+    } catch (error) {
+      console.error("Failed to update task", error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const openEditModal = (task) => {
+    setEditingTask(task);
+    setTitle(task.title);
+    setDescription(task.description || "");
+    setPriority(task.priority);
+    setAssigneeId(task.assigneeId || "");
+    setDueDate(task.dueDate ? new Date(task.dueDate).toISOString().split('T')[0] : "");
   };
 
   const handleStatusChange = async (taskId, newStatus) => {
@@ -150,6 +185,15 @@ export default function ProjectDetail() {
               </span>
             )}
           </div>
+
+          {session.user.role === 'ADMIN' && (
+            <button 
+              className={styles.editBtn} 
+              onClick={() => openEditModal(task)}
+            >
+              Edit Task Details
+            </button>
+          )}
           
           {(session.user.role !== 'ADMIN' && session.user.id === task.assigneeId) && (
             <select 
@@ -222,11 +266,11 @@ export default function ProjectDetail() {
         <TaskColumn title="Completed" statusKey="COMPLETED" tasks={tasksByStatus.COMPLETED} />
       </div>
 
-      {showModal && (
+      {(showModal || editingTask) && (
         <div className={styles.modalOverlay}>
           <div className={`glass-panel ${styles.modalContent}`}>
-            <h2 className={styles.modalTitle}>Create New Task</h2>
-            <form onSubmit={handleCreateTask} className={styles.form}>
+            <h2 className={styles.modalTitle}>{editingTask ? "Edit Task" : "Create New Task"}</h2>
+            <form onSubmit={editingTask ? handleUpdateTask : handleCreateTask} className={styles.form}>
               <div className={styles.formGroup}>
                 <label>Task Title</label>
                 <input type="text" required value={title} onChange={(e) => setTitle(e.target.value)} />
@@ -262,9 +306,9 @@ export default function ProjectDetail() {
               </div>
 
               <div className={styles.modalActions}>
-                <button type="button" className="btn-secondary" onClick={() => setShowModal(false)} disabled={submitting}>Cancel</button>
+                <button type="button" className="btn-secondary" onClick={() => { setShowModal(false); setEditingTask(null); }} disabled={submitting}>Cancel</button>
                 <button type="submit" className="btn-primary" disabled={submitting}>
-                  {submitting ? "Adding..." : "Add Task"}
+                  {submitting ? (editingTask ? "Saving..." : "Adding...") : (editingTask ? "Save Changes" : "Add Task")}
                 </button>
               </div>
             </form>
