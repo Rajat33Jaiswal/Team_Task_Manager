@@ -11,7 +11,17 @@ export async function GET(req) {
       return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
 
+    const where = {};
+    if (session.user.role !== 'ADMIN') {
+      where.tasks = {
+        some: {
+          assigneeId: session.user.id
+        }
+      };
+    }
+
     const projects = await prisma.project.findMany({
+      where,
       include: {
         owner: { select: { id: true, name: true, email: true } },
         _count: { select: { tasks: true } }

@@ -56,6 +56,8 @@ export default function Dashboard() {
 
   const recentTasks = [...tasks].sort((a, b) => new Date(b.updatedAt) - new Date(a.updatedAt)).slice(0, 5);
 
+  const assignedProjectsCount = new Set(tasks.map(t => t.projectId)).size;
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -84,6 +86,12 @@ export default function Dashboard() {
           <span className={styles.statTitle} style={{ color: "var(--danger)" }}>Overdue</span>
           <span className={styles.statValue}>{overdueTasks.length}</span>
         </div>
+        {session.user.role !== 'ADMIN' && (
+          <div className={`glass-panel ${styles.statCard}`}>
+            <span className={styles.statTitle} style={{ color: "var(--accent-primary)" }}>My Projects</span>
+            <span className={styles.statValue}>{assignedProjectsCount}</span>
+          </div>
+        )}
       </div>
 
       <div className={styles.tasksSection}>
